@@ -4,18 +4,18 @@ use App\Http\Controllers\AthUsuarioController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\PacienteController;
-use App\Http\Controllers\vistaController;
+use App\Http\Controllers\VistaController;
 use Illuminate\Auth\Middleware\Authenticate;
 use Illuminate\Support\Facades\Route;
 
     /* --- Route Get --- */
 
-Route::get('/',                            [vistaController::class,   'home'])               ->name('home');
-Route::get('/alta',                        [vistaController::class,   'alta'])               ->name('alta.paciente');
-Route::get('/consulta',                    [vistaController::class,   'consultaPacientes'])  ->name('consulta.pacientes');
-Route::get('/consultaUsuario',             [vistaController::class,   'consultaUsuarios'])   ->name('consulta.usuarios')->middleware('auth');
-Route::get('/mantenimiento/{idpaciente?}', [vistaController::class,   'mantenimiento'])      ->name('mantenimiento.paciente');
-Route::get('/login',                       [vistaController::class,   'login'])              ->name('login')->middleware('guest');
+Route::get('/',                            [VistaController::class,   'home'])               ->name('home');
+Route::get('/alta',                        [VistaController::class,   'alta'])               ->name('alta.paciente');
+Route::get('/consulta',                    [VistaController::class,   'consultaPacientes'])  ->name('consulta.pacientes');
+Route::get('/consultaUsuario',             [VistaController::class,   'consultaUsuarios'])   ->name('consulta.usuarios')->middleware('auth');
+Route::get('/mantenimiento/{idpaciente?}', [VistaController::class,   'mantenimiento'])      ->name('mantenimiento.paciente');
+Route::get('/login',                       [VistaController::class,   'login'])              ->name('login')->middleware('guest');
 
 
 

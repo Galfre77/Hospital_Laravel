@@ -5,7 +5,7 @@ use App\Models\Paciente;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class vistaController extends Controller
+class VistaController extends Controller
 {
     public function __construct()
 {
