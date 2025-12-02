@@ -103,8 +103,8 @@ El archivo SQL incluye varios usuarios de prueba con diferentes roles (administr
 ```
 hospital-Laravel/
 ├── app/
-│   ├── Http/Controllers/    # Controladores (PacienteController, UsuarioController, etc.)
-│   └── Models/              # Modelos (Paciente, Usuario)
+│   ├── Http/Controllers/    # Controladores (PacienteController, usuarioController, vistaController, HomeController)
+│   └── Models/              # Modelos (paciente, Usuario)
 ├── bbdd/
 │   └── hospital.sql         # Script SQL para importar la base de datos
 ├── resources/
