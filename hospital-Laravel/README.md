@@ -1,61 +1,119 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Hospital Laravel
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Sistema de gestión hospitalaria desarrollado con Laravel 12. Permite realizar operaciones CRUD (Crear, Leer, Actualizar, Eliminar) sobre pacientes y usuarios.
 
-## About Laravel
+## Requisitos del Sistema
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- PHP >= 8.2
+- Composer
+- MySQL / MariaDB
+- Node.js y npm
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Instalación
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### 1. Clonar el repositorio
 
-## Learning Laravel
+```bash
+git clone https://github.com/Galfre77/Hospital_Laravel.git
+cd Hospital_Laravel/hospital-Laravel
+```
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### 2. Instalar dependencias
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+```bash
+composer install
+npm install
+```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### 3. Configurar el archivo de entorno
 
-## Laravel Sponsors
+```bash
+cp .env.example .env
+php artisan key:generate
+```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+Editar el archivo `.env` con la configuración de la base de datos:
 
-### Premium Partners
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=hospital
+DB_USERNAME=tu_usuario
+DB_PASSWORD=tu_contraseña
+```
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+### 4. Configurar la base de datos
 
-## Contributing
+El proyecto incluye un archivo SQL listo para importar en la carpeta `bbdd/`. Para configurar la base de datos:
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+1. Crear la base de datos en MySQL/MariaDB o utilizar el archivo SQL que la crea automáticamente
+2. Importar el archivo `bbdd/hospital.sql`:
 
-## Code of Conduct
+```bash
+mysql -u tu_usuario -p < bbdd/hospital.sql
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+O importar mediante phpMyAdmin u otra herramienta de gestión de bases de datos.
 
-## Security Vulnerabilities
+Este archivo SQL contiene:
+- Estructura de tablas (paciente, usuarios, log_paciente, etc.)
+- Datos de prueba para pacientes y usuarios
+- Triggers para registro de actividad en log_paciente
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### 5. Compilar assets
 
-## License
+```bash
+npm run build
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### 6. Iniciar el servidor
+
+```bash
+php artisan serve
+```
+
+La aplicación estará disponible en `http://localhost:8000`
+
+## Funcionalidades CRUD
+
+### Gestión de Pacientes
+- **Crear**: Alta de nuevos pacientes con NIF, nombre, apellidos y fechas
+- **Leer**: Consulta de pacientes registrados
+- **Actualizar**: Modificación de datos de pacientes existentes
+- **Eliminar**: Baja de pacientes del sistema
+
+### Gestión de Usuarios
+- Registro de usuarios
+- Inicio de sesión / Cierre de sesión
+- Recuperación de contraseña
+- Roles de administrador
+
+## Usuarios de Prueba
+
+El archivo SQL incluye varios usuarios de prueba con diferentes roles (administrador y usuario estándar).
+
+> **Nota**: Las contraseñas están hasheadas con bcrypt. Para probar el sistema, puedes:
+> - Registrar un nuevo usuario desde la página de registro
+> - Consultar la tabla `usuarios` en la base de datos para ver los emails disponibles
+> - Actualizar la contraseña de un usuario existente mediante SQL
+
+## Estructura del Proyecto
+
+```
+hospital-Laravel/
+├── app/
+│   ├── Http/Controllers/    # Controladores (PacienteController, UsuarioController, etc.)
+│   └── Models/              # Modelos (Paciente, Usuario)
+├── bbdd/
+│   └── hospital.sql         # Script SQL para importar la base de datos
+├── resources/
+│   └── views/               # Vistas Blade
+├── routes/
+│   └── web.php              # Rutas de la aplicación
+└── ...
+```
+
+## Licencia
+
+Este proyecto utiliza el framework Laravel que está licenciado bajo la [licencia MIT](https://opensource.org/licenses/MIT).
