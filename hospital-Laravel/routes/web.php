@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/',                            [vistaController::class,   'home'])               ->name('home');
 Route::get('/alta',                        [vistaController::class,   'alta'])               ->name('alta.paciente');
 Route::get('/consulta',                    [vistaController::class,   'consultaPacientes'])  ->name('consulta.pacientes');
-Route::get('/consultaUsuario',             [UsuarioController::class,   'consultaUsuarios'])   ->name('consulta.usuarios')->middleware('auth');
+Route::get('/consultaUsuario',             [UsuarioController::class, 'consultaUsuarios'])   ->name('consulta.usuarios')->middleware('auth');
 Route::get('/mantenimiento/{idpaciente?}', [vistaController::class,   'mantenimiento'])      ->name('mantenimiento.paciente');
 Route::get('/login',                       [vistaController::class,   'login'])              ->name('login')->middleware('guest');
 

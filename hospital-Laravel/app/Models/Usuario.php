@@ -30,6 +30,8 @@ class Usuario extends Authenticatable
      */
     public static function altaRegistro(Request $request): self
     {
+
+
         // FIX: validar desde Request (si no usas FormRequest)
         $data = $request->validate([
             'nif'        => 'required|string|max:9|unique:usuarios,nif',
@@ -47,8 +49,11 @@ class Usuario extends Authenticatable
         if ($request->hasFile('foto')) {
             $file = $request->file('foto');
             $nombreImagen = uniqid() . '_' . $file->getClientOriginalName();
-
-            $file->storeAs('public/assets/img', $nombreImagen);
+            $rutaImagen = public_path('assets/img');
+            if (!file_exists($rutaImagen)) {
+                mkdir($rutaImagen, 0755, true);
+            }
+            $file->move($rutaImagen, $nombreImagen);
         }
 
         // FIX: una sola creación; hashea password

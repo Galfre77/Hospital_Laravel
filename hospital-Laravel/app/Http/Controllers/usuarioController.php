@@ -47,10 +47,7 @@ class UsuarioController extends Controller
         $datos = $request->all();
         // Validamos los datos del formulario
         $validar   = validator($datos, $this->reglas, $this->mensajes);
-        //echo "<pre>";
-        //var_dump($validar ->errors());
-        //echo "</pre>";
-        //exit;
+
         if ($validar->fails()){
             return back()->withErrors($validar)->withInput();
         }
@@ -61,10 +58,8 @@ class UsuarioController extends Controller
     public function consultaUsuarios()
     {
         $consultaUsuarios = Usuario::all();
-
         return view('consulta-usuarios', compact('consultaUsuarios'));
     }
-
     public function login(Request $request)
     {
         $usuario = Usuario::where('nif', $request->input('nif'))->first();
