@@ -58,6 +58,12 @@ class UsuarioController extends Controller
         Usuario::altaRegistro($request);//Pasamos el objeto original, mantiene todos los métodos de la clase Request
         return to_route('login')->with('status', 'Cuenta creada');
     }
+    public function consultaUsuarios()
+    {
+        $consultaUsuarios = Usuario::all();
+
+        return view('consulta-usuarios', compact('consultaUsuarios'));
+    }
 
     public function login(Request $request)
     {

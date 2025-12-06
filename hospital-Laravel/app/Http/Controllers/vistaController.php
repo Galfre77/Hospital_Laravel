@@ -52,10 +52,7 @@ class vistaController extends Controller
     {
         return view('alta');
     }
-    public function consultaUsuarios()
-    {
-        return view('consulta-usuarios');
-    }
+
     public function mantenimiento($idpaciente = null)
     {
         $paciente = $idpaciente ? Paciente::find($idpaciente) : null;
